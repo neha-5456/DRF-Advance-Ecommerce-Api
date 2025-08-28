@@ -17,9 +17,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         wcapi = API(
-            url="https://staging18.homeroyale.com.au/",
-            consumer_key="ck_e5c73345132847bc26827f2ef82dd66a30c7cb51",
-            consumer_secret="cs_56507dc4d6f49dbf66e97fa5769a6afcf5386a2d",
+            url="",
+            consumer_key="",
+            consumer_secret="",
             version="wc/v3"
         )
 
