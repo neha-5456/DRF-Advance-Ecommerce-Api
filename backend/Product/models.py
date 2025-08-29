@@ -55,7 +55,7 @@ class Product(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True, related_name="products")
     tags = models.ManyToManyField(Tag, blank=True)
     attributes = models.ManyToManyField(AttributeValue, blank=True)
-
+    total_sales = models.PositiveIntegerField(default=0)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     discount_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     tax = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
