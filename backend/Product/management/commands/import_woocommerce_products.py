@@ -18,8 +18,8 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         wcapi = API(
             url="",
-            consumer_key="",
-            consumer_secret="",
+            consumer_key="ck_5bf950ecece9fd819c298f0d8fa62f90e807e907",
+            consumer_secret="cs_4a86476f14cc0b2758020c4b1d81f9b30f146ee6",
             version="wc/v3"
         )
 

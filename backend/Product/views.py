@@ -8,11 +8,12 @@ from rest_framework import mixins, generics , viewsets
 from rest_framework import filters
 from collections import defaultdict
 from rest_framework.permissions import AllowAny
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 
 
-
-
+@method_decorator(cache_page(60 * 10), name="dispatch")  
 class CategoryListCreateView(mixins.ListModelMixin,mixins.CreateModelMixin, mixins.RetrieveModelMixin, generics.GenericAPIView):
     permission_classes = [AllowAny] 
     queryset = Category.objects.all()
@@ -28,7 +29,7 @@ class CategoryListCreateView(mixins.ListModelMixin,mixins.CreateModelMixin, mixi
 
 
     
-    
+@method_decorator(cache_page(60 * 10), name="dispatch")   
 class ProductListCreateView(mixins.ListModelMixin,mixins.CreateModelMixin,mixins.RetrieveModelMixin,  generics.GenericAPIView):
     permission_classes = [AllowAny] 
     def get_queryset(self):
@@ -45,7 +46,7 @@ class ProductListCreateView(mixins.ListModelMixin,mixins.CreateModelMixin,mixins
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
-
+@method_decorator(cache_page(60 * 10), name="dispatch")  
 class ProductViewSet(mixins.ListModelMixin,
                      mixins.RetrieveModelMixin,
                      viewsets.GenericViewSet):
@@ -64,7 +65,7 @@ class ProductViewSet(mixins.ListModelMixin,
         return Response(grouped)
  
  
-    
+@method_decorator(cache_page(60 * 10), name="dispatch")     
 class CategoryProductsView(APIView):
     permission_classes = [AllowAny] 
     def get(self, request, category_name):
@@ -79,6 +80,7 @@ class CategoryProductsView(APIView):
 
 
 #************New Arrival Product *************//
+@method_decorator(cache_page(60 * 10), name="dispatch")  
 class NewArrivalProductList(generics.ListAPIView):
     permission_classes = [AllowAny]
     serializer_class = ProductSerializer
@@ -88,6 +90,7 @@ class NewArrivalProductList(generics.ListAPIView):
         return Product.objects.all().order_by('-created_at')[:8]    
     
 #************Featured Product *************//
+@method_decorator(cache_page(60 * 10), name="dispatch")  
 class FeaturedProductList(generics.ListAPIView):
     permission_classes = [AllowAny]
     serializer_class = ProductSerializer
@@ -97,6 +100,7 @@ class FeaturedProductList(generics.ListAPIView):
         return Product.objects.filter(is_featured=True).order_by('-created_at')[:8]
     
 #************Top Sell Product *************//   
+@method_decorator(cache_page(60 * 10), name="dispatch")  
 class TopSellingProductList(generics.ListAPIView):
     permission_classes = [AllowAny]
     serializer_class = ProductSerializer

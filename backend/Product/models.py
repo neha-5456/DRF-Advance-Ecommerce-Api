@@ -48,7 +48,7 @@ class AttributeValue(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(max_length=200 , unique=True)
     sku = models.CharField(max_length=100, unique=True, null=True, blank=True)
     description = RichTextField()
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name="products")
